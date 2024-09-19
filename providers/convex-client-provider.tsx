@@ -24,7 +24,11 @@
   return (
     <ClerkProvider>
       <ConvexProviderWithClerk useAuth={useAuth} client={convex}>
-        {children}
+        <Authenticated>{children}</Authenticated>
+        <AuthLoading>
+          Loading....
+        </AuthLoading>
+        
       </ConvexProviderWithClerk>
 
     </ClerkProvider>
