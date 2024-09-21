@@ -21,7 +21,7 @@ export const OrgSidebar =  () =>  {
 
 
   return (
-    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5">
+    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5  text-white rounded-md ml-3 ">
       <Link href="/">
         <div className="flex items-center gap-x-2">
           {/* logo implementation here 
@@ -65,7 +65,7 @@ export const OrgSidebar =  () =>  {
         }
       }}/>
       <div className="space-y-1 w-full">
-        <Button variant= {favourites ? "ghost" : "secondary"}
+        <Button variant= {favourites ? "secondary" : "ghost"}
         asChild
         size="lg"
         className="font-normal justify-start px-2 w-full bg-dark-3">
