@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link" 
-import Image from "next/image" 
+
 import {Poppins} from 'next/font/google'
 import { cn } from "@/lib/utils"
 import { OrganizationSwitcher } from "@clerk/nextjs"
@@ -50,13 +50,7 @@ export const OrgSidebar =  () =>  {
             alignItems: "center",
             width: "100%",
           },
-          // variables: {
-          //   colorText: "#fff",
-          //   colorPrimary: "#0E78F9",
-          //   colorBackground: "#1C1F2E",
-          //   colorInputBackground: "#252A41",
-          //   colorInputText: "#fff",
-          // },
+         
           organizationSwitcherTrigger:{
             padding:"6px",
             width: "100%",

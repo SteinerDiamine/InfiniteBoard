@@ -113,3 +113,22 @@ body {
 .animate-jelly {
   animation: jelly 1.5s infinite ease-in-out;
 }
+
+.bg-dark-3 {
+  background: linear-gradient(90deg, rgba(36, 41, 47, 1) 0%, rgba(24, 30, 35, 1) 100%);
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.floating {
+  animation: float 3s ease-in-out infinite;
+}
+
+
