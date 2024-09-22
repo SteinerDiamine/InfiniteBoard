@@ -8,6 +8,7 @@ import { OrganizationSwitcher } from "@clerk/nextjs"
 import { Button } from "@/components/ui/button"
 import {  LayoutDashboard, Star } from "lucide-react"
 import { useSearchParams } from "next/navigation"
+import Image from "next/image"
 
 const font = Poppins ({
   subsets: ['latin'],
@@ -21,16 +22,16 @@ export const OrgSidebar =  () =>  {
 
 
   return (
-    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5  text-white rounded-md ml-3 ">
+    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5  text-white rounded-md ml-3  ">
       <Link href="/">
         <div className="flex items-center gap-x-2">
-          {/* logo implementation here 
+      
            <Image 
-           src="/logo.svg"
+           src="/icons/logo2.svg"
            alt="Logo"
-           height={20}
-           width={20}
-           />  */}
+           height={50}
+           width={50}
+           /> 
 
       <span className= {cn("font-semibold text-2xl",
         font.className,)}>

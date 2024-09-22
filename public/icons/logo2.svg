@@ -1,0 +1,28 @@
+<svg
+  version="1.1"
+  id="Layer_1"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:xlink="http://www.w3.org/1999/xlink"
+  viewBox="0 0 100 100"
+  xml:space="preserve"
+  width="100"
+  height="100"
+>
+  <!-- Background Circle -->
+  <circle cx="50" cy="50" r="48" fill="#010147" />
+
+  <!-- Paintbrush Icon -->
+  <path
+    d="M40 55 L30 75 Q29 79 34 80 Q40 81 45 75 L60 60"
+    fill="#FF6B6B"
+    stroke="#FFFFFF"
+    stroke-width="3"
+  />
+
+  <!-- Palette Icon -->
+  <circle cx="70" cy="35" r="12" fill="#FFFFFF" />
+  <circle cx="65" cy="32" r="2" fill="#FF6B6B" />
+  <circle cx="75" cy="32" r="2" fill="#FFD93D" />
+  <circle cx="70" cy="28" r="2" fill="#4CAF50" />
+  <circle cx="70" cy="38" r="2" fill="#2196F3" />
+</svg>
