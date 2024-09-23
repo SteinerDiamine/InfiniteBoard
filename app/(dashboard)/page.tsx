@@ -1,6 +1,7 @@
 "use client"
 import { useOrganization } from "@clerk/nextjs";
 import EmptyOrganization from "./_components/empty-org";
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 
 
 interface DashboardPageProps {
@@ -13,7 +14,8 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
   const { organization } = useOrganization();
   
   return (
-    <div className='bg-dark-4 flex-1 pt-10 mt-3 rounded-lg h-[calc(100vh-80px)] overflow-auto p-6'>
+    <BackgroundGradientAnimation>
+    <div className=' flex-1 pt-10 mt-3 rounded-lg h-[calc(100vh-80px)] overflow-auto p-6'>
       {JSON.stringify(searchParams)} {/* Now this will work correctly */}
       <h1 className='text-white text-4xl font-bold mb-8'>Dashboard</h1>
 
@@ -25,6 +27,7 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
   <p>Board List!</p>
 )}
 </div>
+</BackgroundGradientAnimation>
 );
 }
 
