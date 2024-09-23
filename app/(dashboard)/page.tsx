@@ -2,6 +2,7 @@
 import { useOrganization } from "@clerk/nextjs";
 import EmptyOrganization from "./_components/empty-org";
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
+import BoardList from "./_components/board-list";
 
 
 interface DashboardPageProps {
@@ -24,7 +25,9 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
 {!organization ? (
   <EmptyOrganization />
 ) : (
-  <p>Board List!</p>
+  <BoardList 
+  orgId={organization.id}
+  query={searchParams}/>
 )}
 </div>
 </BackgroundGradientAnimation>

@@ -16,9 +16,9 @@ const EmptyOrganization = () => {
       width={200}
       />
 
-      <h2 className="text-2xl font-semibold mt-6">Creation is enough unto itself -By me XD</h2>
-      <p className="text-muted-foreground text-sm mt-2">
-          Create the next wonder, Hell yeah , Love you Thanks for admiring me although u should adore me 
+      <h2 className="text-black text-2xl font-semibold mt-6">Creation is enough unto itself -By me XD</h2>
+      <p className="text-black text-muted-foreground text-sm mt-2">
+          Create the next wonder, Hell yeah , Love you Thanks 
       </p>
         <div className="mt-6">
           <Dialog>
