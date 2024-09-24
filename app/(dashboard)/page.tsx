@@ -16,7 +16,7 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
   
   return (
     <BackgroundGradientAnimation>
-    <div className=' flex-1 pt-10 mt-3 rounded-lg h-[calc(100vh-80px)] overflow-auto p-6'>
+    <div className=' flex-1 pt-10 mt-3 rounded-lg h-[calc(100vh-80px)] overflow-auto p-6 '>
       {JSON.stringify(searchParams)} {/* Now this will work correctly */}
       <h1 className='text-white text-4xl font-bold mb-8'>Dashboard</h1>
 

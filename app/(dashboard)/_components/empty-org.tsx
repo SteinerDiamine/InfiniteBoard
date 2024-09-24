@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { CreateOrganization } from "@clerk/nextjs"
 import Image from "next/image"
 
-
+//gotta implement img here
 
 const EmptyOrganization = () => {
   return (

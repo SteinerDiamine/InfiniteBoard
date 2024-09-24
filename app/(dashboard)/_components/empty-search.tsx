@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export const EmptySearch = () => {
   return (
-    <div className="h-full flex flex-col items-center justify-center">
+    <div className="h-full flex flex-col items-center justify-center relative z-10 text-opacity-100">
       <Image
       src="/icons/book.svg"
       alt="Empty"
