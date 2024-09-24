@@ -15,7 +15,7 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
   const { organization } = useOrganization();
   
   return (
-    <BackgroundGradientAnimation>
+    <BackgroundGradientAnimation >
     <div className=' flex-1 pt-10 mt-3 rounded-lg h-[calc(100vh-80px)] overflow-auto p-6 '>
       {JSON.stringify(searchParams)} {/* Now this will work correctly */}
       <h1 className='text-white text-4xl font-bold mb-8'>Dashboard</h1>
@@ -23,7 +23,8 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
 
 
 {!organization ? (
-  <EmptyOrganization />
+  <EmptyOrganization /> 
+  
 ) : (
   <BoardList 
   orgId={organization.id}
@@ -35,3 +36,5 @@ const DashboardPage = ({ searchParams }: DashboardPageProps) => { // Destructure
 }
 
 export default DashboardPage;
+
+

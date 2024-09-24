@@ -53,16 +53,20 @@ export const BackgroundGradientAnimation = ({
     document.body.style.setProperty("--blending-value", blendingValue);
   }, [gradientBackgroundStart, gradientBackgroundEnd, firstColor, secondColor, thirdColor, fourthColor, fifthColor, pointerColor, size, blendingValue]);
 
-  useEffect(() => {
-    function move() {
-      if (!interactiveRef.current) return;
-      setCurX(curX + (tgX - curX) / 20);
-      setCurY(curY + (tgY - curY) / 20);
-      interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-    }
+  // Separate move function from useEffect
+  const move = () => {
+    if (!interactiveRef.current) return;
+    setCurX((prevX) => prevX + (tgX - prevX) / 20);
+    setCurY((prevY) => prevY + (tgY - prevY) / 20);
+    interactiveRef.current.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
+  };
 
-    move();
-  }, [curX, curY, tgX, tgY]);
+  useEffect(() => {
+    if (interactive) {
+      const interval = setInterval(move, 1000 / 60); // 60 FPS animation
+      return () => clearInterval(interval);
+    }
+  }, [curX, curY, tgX, tgY, interactive]);
 
   const handleMouseMove = (event: React.MouseEvent<HTMLDivElement>) => {
     if (interactiveRef.current) {
@@ -94,20 +98,21 @@ export const BackgroundGradientAnimation = ({
           </filter>
         </defs>
       </svg>
-      <div className={cn("", className)}>{children}</div>
+      <div className={cn("relative z-10", className)}>{children}</div> {/* Changed to relative positioning and added z-index */}
       <div
         className={cn(
-          "gradients-container w-full h-full absolute top-0 left-0", // Use absolute position for gradient container
+          "gradients-container w-full h-full absolute top-0 left-0 z-0", // Use absolute position for gradient container
           isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
         )}
       >
+        {/* Adjust opacity and z-index */}
         <div
           className={cn(
             `absolute [background:radial-gradient(circle_at_center,_var(--first-color)_0,_var(--first-color)_50%)_no-repeat]`,
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
-            `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`, // Centering adjustments
+            `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
             `animate-first`,
-            `opacity-100`
+            `opacity-50` // Adjusted opacity
           )}
         ></div>
         <div
@@ -116,7 +121,7 @@ export const BackgroundGradientAnimation = ({
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
             `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
             `animate-second`,
-            `opacity-100`
+            `opacity-50`
           )}
         ></div>
         <div
@@ -125,7 +130,7 @@ export const BackgroundGradientAnimation = ({
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
             `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
             `animate-third`,
-            `opacity-100`
+            `opacity-50`
           )}
         ></div>
         <div
@@ -134,7 +139,7 @@ export const BackgroundGradientAnimation = ({
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
             `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
             `animate-fourth`,
-            `opacity-70`
+            `opacity-50`
           )}
         ></div>
         <div
@@ -143,7 +148,7 @@ export const BackgroundGradientAnimation = ({
             `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
             `top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`,
             `animate-fifth`,
-            `opacity-100`
+            `opacity-50`
           )}
         ></div>
 
@@ -153,8 +158,8 @@ export const BackgroundGradientAnimation = ({
             onMouseMove={handleMouseMove}
             className={cn(
               `absolute [background:radial-gradient(circle_at_center,_rgba(var(--pointer-color),_0.8)_0,_rgba(var(--pointer-color),_0)_50%)_no-repeat]`,
-              `[mix-blend-mode:var(--blending-value)] w-full h-full`,
-              `opacity-70`
+              `[mix-blend-mode:var(--blending-value)] w-[var(--size)] h-[var(--size)]`,
+              `opacity-50` // Reduced opacity for the pointer effect
             )}
           ></div>
         )}

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 import { CreateOrganization } from "@clerk/nextjs"
 import Image from "next/image"
 
-//gotta implement img here
+
 
 const EmptyOrganization = () => {
   return (
@@ -21,16 +21,14 @@ const EmptyOrganization = () => {
           Create the next wonder, Hell yeah , Love you Thanks 
       </p>
         <div className="mt-6">
-          <Dialog>
-            <DialogTrigger asChild>
-              <Button size="lg">
-                Create an organization
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="p-0 bg-transparent border-none">
-              <CreateOrganization />
-            </DialogContent>
-          </Dialog>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button size="lg" >Create organization </Button>
+          </DialogTrigger>
+          <DialogContent className="p-0 bg-transparent border-none max-w-[480px]">
+            <CreateOrganization />
+          </DialogContent>
+        </Dialog>
         </div>
     </div>
   )
