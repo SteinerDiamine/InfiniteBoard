@@ -1,6 +1,8 @@
 "use client"
 
 import { EmptySearch } from "./empty-search";
+import { EmptyBoards } from "./sidebar/empty-boards";
+import { EmptyFavourites } from "./sidebar/empty-favourites";
 
 interface BoardListProps {
   orgId: string;
@@ -25,17 +27,13 @@ export const BoardList = ({
 
   if (!data.length && query.favourites){
     return(
-      <div>
-        No favourites
-      </div>
+      <EmptyFavourites/>
     )
   }
 
   if(!data?.length){
     return(
-      <div>
-        No boards at all
-      </div>
+      <EmptyBoards/>
     )
   }
  
