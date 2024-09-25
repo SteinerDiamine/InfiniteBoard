@@ -25,6 +25,13 @@ export const BoardList = ({
   const data = useQuery(api.boards.get, { orgId, ...query });
 
 
+  if(data === undefined) {
+    return (
+      <div>Loading...</div>
+    )
+  }
+
+
 
   if(!data.length && query.search) {
     return (
