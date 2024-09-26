@@ -2,10 +2,19 @@ import { Navbar } from "./_components/Navbar";
 import { OrgSidebar } from "./_components/sidebar/Org-sidebar";
 import Sidebar from "./_components/sidebar/index";
 
+export const metadata = {
+  title: "Infinite Board",
+  description: "The Meeting place with innovative idea",
+  icons: {
+    icon: "/icons/logo.jpg",
+  },
+};
+
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
 };
+
 
 
 
