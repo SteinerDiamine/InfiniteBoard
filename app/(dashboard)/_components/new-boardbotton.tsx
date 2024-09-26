@@ -21,7 +21,7 @@ export function NewBoardButton({ orgId, disabled }: NewBoardButtonProps) {
     create({ orgId, title: "Untitled" })
       .then((id) => {
         toast.success("Board created!");
-        router.push(`/`);
+        router.push(`/board/${id}`);
       })
       .catch(() => toast.error("Failed to create board"));
   };
