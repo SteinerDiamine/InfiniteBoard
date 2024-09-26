@@ -8,6 +8,11 @@ import { Footer } from "./footer";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Actions } from "@/components/actions";
 import { MoreHorizontal } from "lucide-react";
+import { useApiMutation } from "@/hooks/use-api-mutation";
+import { api } from "@/convex/_generated/api";
+import { Id } from "@/convex/_generated/dataModel";
+import { toast } from "sonner";
+import { useMutation } from "convex/react";
 
 interface BoardCardProps {
   id: string;
@@ -40,6 +45,36 @@ export const BoardCard = ({
     addSuffix: true,
   });
 
+  const handleFavourite = useMutation(api.board.favourite);
+  const handleUnfavourite = useMutation(api.board.unfavourite);
+
+  const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
+    api.board.favourite
+  );
+  const { mutate: unfavourite, isLoading: isUnfavouriting } = useApiMutation(
+    api.board.unfavourite
+  );
+
+
+  const toggleFavourite = () => {
+    if (isFavourite) {
+      // Unfavourite: Pass both id and orgId
+      handleFavourite({ id: id as Id<"boards">, orgId })
+        .catch(() =>
+          toast.error("Failed to unfavourite board")
+        );
+    } else {
+      // Favourite: Pass both id and orgId
+      handleFavourite({ id: id as Id<"boards">, orgId })
+        .catch(() =>
+          toast.error("Failed to favourite board")
+        );
+    }
+  };
+  
+  
+
+
 
   return(
     <Link href={`/board/${id}`}>
@@ -66,8 +101,8 @@ export const BoardCard = ({
           title={title}
           authorLabel={authorLabel}
           createdAtLabel={createdAtLabel}
-          onClick={() =>{}}
-          disabled={false}
+          onClick= {toggleFavourite}
+          disabled={isFavouriting || isUnfavouriting}
         />
         
 

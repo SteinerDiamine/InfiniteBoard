@@ -85,7 +85,7 @@ export const BoardList = ({
            authorName={board.authorName}
            createdAt={board._creationTime}
            orgId={board.orgId}
-           isFavourite={false}
+           isFavourite={board.isFavourite}
          />
         ))}
 
