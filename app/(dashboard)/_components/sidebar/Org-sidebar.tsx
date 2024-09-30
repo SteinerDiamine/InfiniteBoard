@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import {  LayoutDashboard, Star } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import Image from "next/image"
+import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation"
 
 const font = Poppins ({
   subsets: ['latin'],
@@ -22,7 +23,8 @@ export const OrgSidebar =  () =>  {
 
 
   return (
-    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5  text-white rounded-md ml-3  ">
+  
+    <div className="hidden lg:flex flex-col space-y-6 w-[206px] pl-5 pt-5  text-white rounded-lg ml-3  ">
       <Link href="/">
         <div className="flex items-center gap-x-2">
       
@@ -69,7 +71,7 @@ export const OrgSidebar =  () =>  {
         <Button variant= {favourites ? "secondary" : "default"}
         asChild
         size="lg"
-        className="font-normal justify-start px-2 w-full bg-dark-3">
+        className="font-normal justify-start px-2 w-full bg-dark-3 rounded-md">
           <Link 
           href= "/">
             <LayoutDashboard className="h-4 w-4 mr-2"/>
@@ -81,7 +83,7 @@ export const OrgSidebar =  () =>  {
 
         asChild
         size="lg"
-        className="font-normal justify-start px-2 w-full bg-dark-3">
+        className="font-normal justify-start px-2 w-full bg-dark-3 rounded-md">
           <Link 
           href= {{
             pathname: '/',

@@ -46,7 +46,7 @@ export const BoardCard = ({
   });
 
   const handleFavourite = useMutation(api.board.favourite);
-  const handleUnfavourite = useMutation(api.board.unfavourite);
+  // const handleUnfavourite = useMutation(api.board.unfavourite);
 
   const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
     api.board.favourite

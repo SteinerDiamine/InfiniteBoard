@@ -2,6 +2,16 @@
 @tailwind components;
 @tailwind utilities;
 
+
+html,
+body,
+#__next {
+  height: 100%;
+  width: 100%;
+  margin: 0;
+}
+
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -130,5 +140,4 @@ body {
 .floating {
   animation: float 3s ease-in-out infinite;
 }
-
 
