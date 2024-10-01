@@ -22,10 +22,17 @@
 
 
 
-const Participants = () => {
+export const Participants = () => {
   return (
     <div className="absolute h-12 top-2 right-2 bg-white rounded-lg p-3 flex item-center shadow-md text-gray-700 ">List of users</div>
   )
 }
 
-export default Participants
+export const ParticipantsSkeleton = () => {
+  return (
+    <div className="absolute h-12 top-2 right-2 bg-white rounded-md p-3 flex items-center shadow-md w-[100px]" />
+  );
+}
+
+
+

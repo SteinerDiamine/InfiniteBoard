@@ -66,7 +66,7 @@ import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
 import type { Layer, Color } from "@/types/canvas";
 
 const client = createClient({
-  publicApiKey:"pk_dev_0O8AQlFQYl9p__5Ji7mtEBujcEo0kQMyxVCdF7RmAOKNIsuyEcS3I5ZprkSk5Uq2"
+  authEndpoint:"/api/liveblocks-auth",
 })
 
 // Presence represents the properties that exist on every user in the Room
