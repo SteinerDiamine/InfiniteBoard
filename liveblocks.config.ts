@@ -1,4 +1,60 @@
-import { Color, Layer } from "@/types/canvas";
+// import { createClient } from "@liveblocks/client";
+// import { createRoomContext } from "@liveblocks/react";
+
+// const client = createClient({
+//   publicApiKey:"pk_dev_0O8AQlFQYl9p__5Ji7mtEBujcEo0kQMyxVCdF7RmAOKNIsuyEcS3I5ZprkSk5Uq2"
+// })
+
+
+// declare global {
+//   interface Liveblocks {
+//     // Each user's Presence, for useMyPresence, useOthers, etc.
+//     Presence: {
+//       // Example, real-time cursor coordinates
+//       // cursor: { x: number; y: number };
+//     };
+
+//     // The Storage tree for the room, for useMutation, useStorage, etc.
+//     Storage: {
+//       // Example, a conflict-free list
+//       // animals: LiveList<string>;
+//     };
+
+//     // Custom user info set when authenticating with a secret key
+//     UserMeta: {
+//       id: string;
+//       info: {
+//         // Example properties, for useSelf, useUser, useOthers, etc.
+//         // name: string;
+//         // avatar: string;
+//       };
+//     };
+
+//     // Custom events, for useBroadcastEvent, useEventListener
+//     RoomEvent: {};
+//       // Example has two events, using a union
+//       // | { type: "PLAY" } 
+//       // | { type: "REACTION"; emoji: "🔥" };
+
+//     // Custom metadata set on threads, for useThreads, useCreateThread, etc.
+//     ThreadMetadata: {
+//       // Example, attaching coordinates to a thread
+//       // x: number;
+//       // y: number;
+//     };
+
+//     // Custom room info set with resolveRoomsInfo, for useRoomInfo
+//     RoomInfo: {
+//       // Example, rooms with a title and url
+//       // title: string;
+//       // url: string;
+//     };
+//   }
+// }
+
+// export {};
+
+
 import {
   createClient,
   LiveList,
@@ -7,10 +63,11 @@ import {
 } from "@liveblocks/client";
 import { createRoomContext, createLiveblocksContext } from "@liveblocks/react";
 
+import type { Layer, Color } from "@/types/canvas";
+
 const client = createClient({
-  throttle: 16,
-  authEndpoint: "pk_dev_0O8AQlFQYl9p__5Ji7mtEBujcEo0kQMyxVCdF7RmAOKNIsuyEcS3I5ZprkSk5Uq2",
-});
+  publicApiKey:"pk_dev_0O8AQlFQYl9p__5Ji7mtEBujcEo0kQMyxVCdF7RmAOKNIsuyEcS3I5ZprkSk5Uq2"
+})
 
 // Presence represents the properties that exist on every user in the Room
 // and that will automatically be kept in sync. Accessible through the
@@ -20,7 +77,6 @@ type Presence = {
   selection: string[];
   pencilDraft: [x: number, y: number, pressure: number][] | null;
   penColor: Color | null;
-  // ...
 };
 
 // Optionally, Storage represents the shared document that persists in the
@@ -75,7 +131,7 @@ export const {
     useEventListener,
     useErrorListener,
     useStorage,
-  
+   
     useBatch,
     useHistory,
     useUndo,
@@ -103,7 +159,7 @@ export const {
     // useRoomInfo
   },
 } = createRoomContext<Presence, Storage, UserMeta, RoomEvent, ThreadMetadata>(
-  client
+  client,
 );
 
 // Project-level hooks, use inside `LiveblocksProvider`

@@ -1,25 +1,25 @@
 "use client"
-import Info from './info';
-import Participants from './participants';
-import Toolbar from './toolbar';
+
+import Info from "./info"
+import Participants from "./participants"
+import Toolbar from "./toolbar"
 
 interface CanvasProps {
-  boardId : string;
-};
+  boardId: string;
+}
 
 
 const Canvas = ({
-  boardId
+  boardId,
 }: CanvasProps) => {
   return (
     <main className="h-full w-full relative bg-neutral-100 touch-none">
-      <Info />
-      <Participants />
-      <Toolbar
-        
-      />
-    </main>
-  );
-};
+      <Info/>
+      <Participants/>
+      <Toolbar/>
 
-export default Canvas;
+    </main>
+  )
+}
+
+export default Canvas
