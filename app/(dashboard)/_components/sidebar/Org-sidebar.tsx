@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button"
 import {  LayoutDashboard, Star } from "lucide-react"
 import { useSearchParams } from "next/navigation"
 import Image from "next/image"
-import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation"
+
 
 const font = Poppins ({
   subsets: ['latin'],

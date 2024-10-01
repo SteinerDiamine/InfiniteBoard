@@ -33,7 +33,7 @@ export const Hint = ({
         </TooltipTrigger>
         <TooltipContent 
               // className=' bg-gray-800 border-red border-none'
-           className='bg-gray-800 text-white p-2 rounded-lg shadow-lg border border-red-700 '
+           className='bg-blue-200 text-black p-2 rounded-lg shadow-lg border  '
               side={side}
               align={align}
               sideOffset={sideOffset}
