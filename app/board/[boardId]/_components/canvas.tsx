@@ -9,7 +9,7 @@ import { Camera, CanvasMode, Color, LayerType, Point, Side, XYWH } from "@/types
 import { CanvasState } from "@/types/canvas";
 import { useHistory , useCanRedo, useCanUndo, useMutation, useStorage, useOthersMapped} from "@/liveblocks.config";
 import { CursorPresence } from "./CursorPresence";
-import { connectionIdToColor, findIntersectingLayersWithRectangle, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
+import { connectionIdToColor, findIntersectingLayersWithRectangle, penPointsToPathLayer, pointerEventToCanvasPoint, resizeBounds } from "@/lib/utils";
 import {nanoid} from 'nanoid'
 import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./LayerPreview";
@@ -181,6 +181,38 @@ const continueDrawing = useMutation(
 );
 
 
+const insertPath = useMutation(
+  ({ storage, self, setMyPresence }) => {
+    const liveLayers = storage.get("layers");
+    const { pencilDraft } = self.presence;
+
+    if (
+      !pencilDraft ||
+      pencilDraft.length < 2 ||
+      liveLayers.size >= MAX_LAYERS
+    ) {
+      setMyPresence({ pencilDraft: null });
+      return;
+    }
+
+    const id = nanoid();
+    liveLayers.set(
+      id,
+      new LiveObject(penPointsToPathLayer(pencilDraft, lastUsedColor))
+    );
+
+    const liveLayerIds = storage.get("layerIds");
+    liveLayerIds.push(id);
+
+    setMyPresence({ pencilDraft: null });
+    setCanvasState({
+      mode: CanvasMode.Pencil,
+    });
+  },
+  [lastUsedColor]
+);
+
+
 
 
 const resizeSelectedLayer = useMutation(
@@ -288,35 +320,39 @@ const onResizeHandlePointerDown = useCallback(
   );
 
 
-  const onPointerUp = useMutation((
-    {},
-    e
-  ) => {
-      const point = pointerEventToCanvasPoint(e ,camera);
+  const onPointerUp = useMutation(
+    ({}, e) => {
+      const point = pointerEventToCanvasPoint(e, camera);
 
-      if(
+      if (
         canvasState.mode === CanvasMode.None ||
         canvasState.mode === CanvasMode.Pressing
       ) {
         unselectLayer();
         setCanvasState({
           mode: CanvasMode.None,
-        })
-      }else if(canvasState.mode === CanvasMode.Inserting){
-        insertLayer(canvasState.layerType , point);
-      }else {
+        });
+      } else if (canvasState.mode === CanvasMode.Pencil) {
+        insertPath();
+      } else if (canvasState.mode === CanvasMode.Inserting) {
+        insertLayer(canvasState.layerType, point);
+      } else {
         setCanvasState({
           mode: CanvasMode.None,
-        })
+        });
       }
       history.resume();
-  },[
-    camera,
-    canvasState,
-    history,
-    insertLayer,
-    unselectLayer,
-  ])
+    },
+    [
+      camera,
+      canvasState,
+      history,
+      insertLayer,
+      unselectLayer,
+      setCanvasState,
+      insertPath,
+    ]
+  );
 
   const selections = useOthersMapped((other) => other.presence.selection);
 
