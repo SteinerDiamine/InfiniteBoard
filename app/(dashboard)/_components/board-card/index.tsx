@@ -45,7 +45,7 @@ export const BoardCard = ({
     addSuffix: true,
   });
 
-  const handleFavourite = useMutation(api.board.favourite);
+  // const handleFavourite = useMutation(api.board.favourite);
   // const handleUnfavourite = useMutation(api.board.unfavourite);
 
   const { mutate: favourite, isLoading: isFavouriting } = useApiMutation(
@@ -56,19 +56,31 @@ export const BoardCard = ({
   );
 
 
+  // const toggleFavourite = () => {
+  //   if (isFavourite) {
+  //     // Unfavourite: Pass both id and orgId
+  //     handleFavourite({ id: id as Id<"boards">, orgId })
+  //       .catch(() =>
+  //         toast.error("Failed to unfavourite board")
+  //       );
+  //   } else {
+  //     // Favourite: Pass both id and orgId
+  //     handleFavourite({ id: id as Id<"boards">, orgId })
+  //       .catch(() =>
+  //         toast.error("Failed to favourite board")
+  //       );
+  //   }
+  // };
+
   const toggleFavourite = () => {
     if (isFavourite) {
-      // Unfavourite: Pass both id and orgId
-      handleFavourite({ id: id as Id<"boards">, orgId })
-        .catch(() =>
-          toast.error("Failed to unfavourite board")
-        );
+      unfavourite({ id: id as Id<"boards"> }).catch(() =>
+        toast.error("Failed to unfavourite board")
+      );
     } else {
-      // Favourite: Pass both id and orgId
-      handleFavourite({ id: id as Id<"boards">, orgId })
-        .catch(() =>
-          toast.error("Failed to favourite board")
-        );
+      favourite({ id: id as Id<"boards">, orgId }).catch(() =>
+        toast.error("Failed to favourite board")
+      );
     }
   };
   
