@@ -14,6 +14,7 @@ import {nanoid} from 'nanoid'
 import { LiveObject } from "@liveblocks/client";
 import { LayerPreview } from "./LayerPreview";
 import { SelectionBox } from "./SelectionBox";
+import { SelectionTools } from "./SelectionTools";
 
 const MAX_LAYERS = 100;
 
@@ -106,6 +107,25 @@ const translateSelectedLayer = useMutation(
   [canvasState]
 );
 
+const unselectLayer = useMutation(({ self, setMyPresence }) => {
+  if (self.presence.selection.length > 0) {
+    setMyPresence({ selection: [] }, { addToHistory: true });
+  }
+}, []);
+
+const startDrawing = useMutation(
+  ({ setMyPresence }, point: Point, pressure: number) => {
+    setMyPresence({
+      pencilDraft: [[point.x, point.y, pressure]],
+      penColor: lastUsedColor,
+    });
+  },
+  [lastUsedColor]
+);
+
+
+
+
 const resizeSelectedLayer = useMutation(
   ({ self, storage }, point: Point) => {
     if (canvasState.mode !== CanvasMode.Resizing) {
@@ -169,7 +189,27 @@ const onResizeHandlePointerDown = useCallback(
     {setMyPresence}
   )=> {
     setMyPresence({cursor:null});
-  },[])
+  },[]);
+
+
+  const onPointerDown = useCallback(
+    (e: React.PointerEvent) => {
+      const point = pointerEventToCanvasPoint(e, camera);
+
+      if (canvasState.mode === CanvasMode.Inserting) return;
+
+      if (canvasState.mode === CanvasMode.Pencil) {
+        startDrawing(point, e.pressure);
+        return;
+      }
+
+      setCanvasState({
+        origin: point,
+        mode: CanvasMode.Pressing,
+      });
+    },
+    [camera, canvasState.mode, setCanvasState, startDrawing]
+  );
 
 
   const onPointerUp = useMutation((
@@ -178,7 +218,15 @@ const onResizeHandlePointerDown = useCallback(
   ) => {
       const point = pointerEventToCanvasPoint(e ,camera);
 
-      if(canvasState.mode === CanvasMode.Inserting){
+      if(
+        canvasState.mode === CanvasMode.None ||
+        canvasState.mode === CanvasMode.Pressing
+      ) {
+        unselectLayer();
+        setCanvasState({
+          mode: CanvasMode.None,
+        })
+      }else if(canvasState.mode === CanvasMode.Inserting){
         insertLayer(canvasState.layerType , point);
       }else {
         setCanvasState({
@@ -191,6 +239,7 @@ const onResizeHandlePointerDown = useCallback(
     canvasState,
     history,
     insertLayer,
+    unselectLayer,
   ])
 
   const selections = useOthersMapped((other) => other.presence.selection);
@@ -253,11 +302,17 @@ const onResizeHandlePointerDown = useCallback(
          redo={history.redo}
          />
 
+        <SelectionTools camera={camera} setLastUsedColor={setLastUsedColor}
+        />
+
          <svg className="h-[100vh] w-[100vw]"
          onWheel={onWheel}
          onPointerMove={OnPointerMove}
          onPointerLeave={onPointerLeave}
-         onPointerUp= {onPointerUp}>
+         onPointerUp= {onPointerUp}
+         onPointerDown ={onPointerDown}
+         >
+        
           <g 
            style={{
             transform:`translate(${camera.x}px, ${camera.y}px)`
