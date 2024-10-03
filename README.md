@@ -6,7 +6,7 @@
 
 ## ✨ Description
 
-Get creative with the flexibility manipulating digital art to make notes draw something , study live with your freiends together ...Combining all in one , I have created this to communicate more easily through digital presence  ! Just sign-up and get started 
+Get creative with the flexibility of manipulating digital art to make notes draw something , study live with your freiends together ...Combining all in one , I have created this to communicate more easily through digital presence  ! Just sign-up and get started 
 
 ## 🔥 Features
 
